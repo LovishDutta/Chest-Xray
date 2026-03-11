@@ -4,7 +4,10 @@ import cv2
 from tensorflow.keras.models import load_model
 from gradcam import make_gradcam_heatmap, overlay_heatmap
 
-model = load_model("chest_xray_model.h5")
+@st.cache_resource
+def load_model():
+    return models.load_model("chest_xray_model.h5")
+load_model()
 
 last_conv_layer = "conv5_block16_concat"
 
